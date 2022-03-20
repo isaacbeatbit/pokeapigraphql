@@ -28,8 +28,8 @@ async function main() {
   const httpServer = createServer(app)
 
   const wsServer = new WebSocketServer({
-    server: httpServer,
-    path: '/'
+    server: httpServer
+    // path: '/'
   })
 
   const serverCleanup = useServer({ schema }, wsServer)
@@ -64,7 +64,7 @@ async function main() {
 
   await server.start()
 
-  server.applyMiddleware({ app, path: '/' })
+  server.applyMiddleware({ app })
   // server.applyMiddleware({ app, path: '/', cors: false })
 
   // app.listen({ port: PORT }, () => {
