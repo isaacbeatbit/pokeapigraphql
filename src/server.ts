@@ -4,10 +4,10 @@ import { ApolloServer } from 'apollo-server-express'
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import typeDefs from './graphql/typeDefs'
 import { createServer } from 'http'
-import { WebSocketServer } from 'ws'
-import { useServer } from 'graphql-ws/lib/use/ws'
 import resolvers from './graphql/resolvers'
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
+// import { WebSocketServer } from 'ws'
+// import { useServer } from 'graphql-ws/lib/use/ws'
+// import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
 
 const prisma = new PrismaClient()
 
@@ -27,19 +27,12 @@ async function main() {
 
   const httpServer = createServer(app)
 
-  const wsServer = new WebSocketServer({
-    server: httpServer
-    // path: '/'
-  })
+  // const wsServer = new WebSocketServer({
+  //   server: httpServer
+  //   // path: '/'
+  // })
 
-  const serverCleanup = useServer({ schema }, wsServer)
-
-  // app.use(
-  //   cors({
-  //     credentials: true,
-  //     origin: ['http://localhost:3000', 'https://studio.apollographql.com']
-  //   })
-  // )
+  // const serverCleanup = useServer({ schema }, wsServer)
 
   const server = new ApolloServer({
     schema,
@@ -47,25 +40,24 @@ async function main() {
       return {
         prisma
       }
-    },
-    plugins: [
-      ApolloServerPluginDrainHttpServer({ httpServer }),
-      {
-        async serverWillStart() {
-          return {
-            async drainServer() {
-              await serverCleanup.dispose()
-            }
-          }
-        }
-      }
-    ]
+    }
+    // plugins: [
+    //   ApolloServerPluginDrainHttpServer({ httpServer }),
+    //   {
+    //     async serverWillStart() {
+    //       return {
+    //         async drainServer() {
+    //           await serverCleanup.dispose()
+    //         }
+    //       }
+    //     }
+    //   }
+    // ]
   })
 
   await server.start()
 
   server.applyMiddleware({ app })
-  // server.applyMiddleware({ app, path: '/', cors: false })
 
   // app.listen({ port: PORT }, () => {
   //   console.log(`🚀 Server ready in http://localhost:${PORT}`)
