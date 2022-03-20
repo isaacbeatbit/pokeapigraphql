@@ -19,14 +19,14 @@ export default {
       if (likeExists) {
         const stars = likeExists.stars + 1
 
-        await prisma.like.update({
+        const likeUpdated = await prisma.like.update({
           where: { name },
           data: {
             stars
           }
         })
 
-        publishLike({ like: likeExists })
+        publishLike({ like: likeUpdated })
       } else {
         const like = await prisma.like.upsert({
           where: { name },
