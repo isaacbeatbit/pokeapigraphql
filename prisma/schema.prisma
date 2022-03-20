@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// model Pokemon {
+//   id    String @id @unique @default(cuid())
+//   name  String @db.VarChar(50)
+//   likes Like[]
+// }
+
+model Like {
+  id    String @id @unique @default(cuid())
+  name  String @unique @db.VarChar(50)
+  stars Int    @default(0) @db.Integer
+}
