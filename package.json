@@ -38,7 +38,7 @@
     "apollo-server-core": "^3.6.4",
     "apollo-server-express": "^3.6.4",
     "cross-fetch": "^3.1.5",
-    "dotenv": "^16.0.0",
+    "Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 60 seconds of launch\n": "^16.0.0",
     "express": "^4.17.3",
     "graphql": "^16.3.0",
     "graphql-subscriptions": "^2.0.0",

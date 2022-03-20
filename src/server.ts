@@ -8,10 +8,13 @@ import resolvers from './graphql/resolvers'
 import { WebSocketServer } from 'ws'
 import { useServer } from 'graphql-ws/lib/use/ws'
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const prisma = new PrismaClient()
 
-const PORT = 4000
+const PORT = process.env.PORT || 4000
 
 interface iContext {
   prisma: PrismaClient
