@@ -59,11 +59,17 @@ async function main() {
 
   server.applyMiddleware({ app, path: '/' })
 
-  httpServer.listen(PORT, () => {
+  app.listen({ port: PORT }, () => {
     console.log(
-      `Server is now running on http://localhost:${PORT}${server.graphqlPath}`
+      `🚀 Server ready in http://localhost:${PORT}${server.graphqlPath}`
     )
   })
+
+  // httpServer.listen(PORT, () => {
+  //   console.log(
+  //     `Server is now running on http://localhost:${PORT}${server.graphqlPath}`
+  //   )
+  // })
 }
 
 main()
